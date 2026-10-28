@@ -2,12 +2,49 @@ const homeView = document.querySelector('#home-view');
 const detailView = document.querySelector('#detail-view');
 const modelInput = document.querySelector('#model');
 const detailTitle = document.querySelector('#detail-title');
-const modelNote = document.querySelector('#detail-model-note');
+const driverPageDescription = document.querySelector('#driver-page-description');
+const detailDriverLink = document.querySelector('#detail-driver-link');
 const networkGuide = document.querySelector('.network');
 const manualList = document.querySelector('.manual-list');
-const models = ['IM C2000', 'IM C2500', 'IM C3000', 'IM C3500', 'IM C4500', 'IM C5500', 'IM C6000', 'IM C2010', 'IM C3010', 'IM C4510', 'IM C6010', 'MP C2004', 'MP C3004', 'MP C3504', 'MP C4504', 'MP C6004', 'MP 2555', 'MP 3055', 'MP 3555', 'MP 4055', 'MP 6055'];
 const popularModels = ['IM C3500', 'IM C3000', 'IM C4500', 'MP C4504', 'MP C3004', 'MP 3555'];
 const officialDriverPage = 'https://www.ricoh-ap.com/downloads/driver-for-office-solutions';
+const modelDriverPages = [
+  { models: ['MP C3001', 'MP C3501'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re2/model/mpc281/mpc281.htm?lang=en' },
+  { models: ['MP C3002', 'MP C3502'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc300/mpc300.htm?lang=en' },
+  { models: ['MP C3003SP', 'MP C3503SP'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc3003/mpc3003.htm' },
+  { models: ['MP 2001SP', 'MP 2501SP'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mp200/mp200.htm' },
+  { models: ['MP 2555', 'MP 3055', 'MP 3555', 'MP 4055', 'MP 5055', 'MP 6055'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mp2595/mp2595.htm' },
+  { models: ['MP C3004', 'MP C3504'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mpc3004/mpc3004.htm' },
+  { models: ['MP C3004EX', 'MP C3504EX'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mpc3004ex/mpc3004ex.htm' },
+  { models: ['MP C2004', 'MP C2504'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc200/mpc200.htm' },
+  { models: ['MP C2004EX', 'MP C2504EX'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re2/model/mpc2004ex/mpc2004ex.htm' },
+  { models: ['MP C2003SP', 'MP C2503SP'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc2003/mpc2003.htm' },
+  { models: ['MP C4502', 'MP C4502A', 'MP C5502', 'MP C5502A'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re2/model/mpc450/mpc450.htm' },
+  { models: ['MP C4503SP', 'MP C5503SP', 'MP C6003SP'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc4503/mpc4503.htm' },
+  { models: ['MP C4504', 'MP C5504', 'MP C6004'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/nrg1/model/mpc4504/mpc4504.htm' },
+  { models: ['MP C4504EX', 'MP C5504EX', 'MP C6004EX'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re1/model/mpc4504ex/mpc4504ex.htm' },
+  { models: ['M 2700', 'M 2701'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/m2700/m2700.htm' },
+  { models: ['IM 2702', 'IM 2702SE'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re2/model/im2702/im2702.htm' },
+  { models: ['IM C2000', 'IM C2500'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re2/model/imc2000/imc2000.htm' },
+  { models: ['IM C3000', 'IM C3500'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/imc3000/imc3000.htm' },
+  { models: ['IM C4500', 'IM C6000'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc4500/imc4500.htm' },
+  { models: ['IM C5500'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re1/model/imc4500/imc4500.htm' },
+  { models: ['IM C2010', 'IM C2510'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re2/model/imc2010/imc2010.htm' },
+  { models: ['IM C3010', 'IM C3510'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc3010/imc3010.htm' },
+  { models: ['IM C4510', 'IM C6010'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc4510/imc4510.htm' },
+  { models: ['IM C5510'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re2/model/imc4510/imc4510.htm' },
+];
+const models = [...new Set([
+  ...modelDriverPages.flatMap(entry => entry.models),
+  'IM C2000', 'IM C2500', 'IM C3000', 'IM C3500', 'IM C4500', 'IM C5500', 'IM C6000',
+  'IM C2010', 'IM C3010', 'IM C4510', 'IM C6010', 'MP C2004', 'MP C3004', 'MP C3504',
+  'MP C4504', 'MP C6004', 'MP 2555', 'MP 3055', 'MP 3555', 'MP 4055', 'MP 6055',
+])].sort();
+document.querySelector('#models').replaceChildren(...models.map(model => {
+  const option = document.createElement('option');
+  option.value = model;
+  return option;
+}));
 
 function showModel(rawModel) {
   const model = rawModel.trim().replace(/\s+/g, ' ').toUpperCase();
@@ -17,7 +54,12 @@ function showModel(rawModel) {
   }
   modelInput.value = model;
   detailTitle.innerHTML = `RICOH <span>${escapeHTML(model)}</span>`;
-  modelNote.textContent = model;
+  const driverPage = resolveDriverPage(model);
+  detailDriverLink.href = driverPage || officialDriverPage;
+  detailDriverLink.innerHTML = `${driverPage ? `Open ${escapeHTML(model)} driver page` : 'Open Ricoh driver catalog'} <span>↗</span>`;
+  driverPageDescription.innerHTML = driverPage
+    ? `Open the official Ricoh support page for <strong>${escapeHTML(model)}</strong>. Choose Windows 10/11, then download the PCL 6 driver.`
+    : `Open Ricoh’s catalog, choose <strong>${escapeHTML(model)}</strong> and your Windows version, then download PCL 6.`;
   const useManualWindowsInstall = isLegacyModel(model);
   const installSteps = useManualWindowsInstall ? legacyInstructions(model) : installerInstructions(model);
   manualList.innerHTML = installSteps.map((step, index) => renderStep(step, index, useManualWindowsInstall)).join('');
@@ -40,6 +82,11 @@ function showModel(rawModel) {
 
 function isLegacyModel(model) {
   return /^MP\s+2500\b/.test(model) || /^MP\s+C\d{3}[12]\b/.test(model);
+}
+
+function resolveDriverPage(model) {
+  const normalized = model.replace(/^(?:(?:RICOH|AFICIO)\s+)+/, '');
+  return modelDriverPages.find(entry => entry.models.includes(normalized))?.url;
 }
 
 function legacyInstructions(model) {
@@ -127,7 +174,7 @@ document.querySelectorAll('a.brand').forEach(brand => brand.addEventListener('cl
   event.preventDefault();
   showHome();
 }));
-document.querySelector('#detail-driver-link').href = officialDriverPage;
+detailDriverLink.href = officialDriverPage;
 networkGuide.hidden = true;
 
 const initialModel = decodeURIComponent(location.hash.slice(1)).replaceAll('-', ' ').trim();

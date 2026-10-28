@@ -1,0 +1,24 @@
+- Aficio MP C3001/C3501 = https://support.ricoh.com/bb/html/dr_ut_e/re2/model/mpc281/mpc281.htm?lang=es
+- Aficio MP C3002/C3502 = https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc300/mpc300.htm?lang=en
+- MP C3003SP/C3503SP = https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc3003/mpc3003.htm
+- MP 2001SP/2501SP = https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mp200/mp200.htm
+- MP 2555/3055/3555/4055/5055/6055 series = https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mp2595/mp2595.htm
+- MP C3004/C3504 series = https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mpc3004/mpc3004.htm
+- MP C3004ex/C3504ex series = https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mpc3004ex/mpc3004ex.htm
+- MP C2004/C2504 series = https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc200/mpc200.htm
+- MP C2004ex/C2504ex series = https://support.ricoh.com/bb/html/dr_ut_e/re2/model/mpc2004ex/mpc2004ex.htm
+- MP C2003SP/C2503SP = https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc2003/mpc2003.htm
+- Aficio MP C4502/C4502A/C5502/C5502A = https://support.ricoh.com/bb/html/dr_ut_e/re2/model/mpc450/mpc450.htm
+- MP C4503SP/C5503SP/C6003SP = https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc4503/mpc4503.htm
+- MP C4504/C5504/C6004 series = https://support.ricoh.com/bb/html/dr_ut_e/nrg1/model/mpc4504/mpc4504.htm
+- MP C4504ex/C5504ex/C6004ex series = https://support.ricoh.com/bb/html/dr_ut_e/re1/model/mpc4504ex/mpc4504ex.htm
+- M 2700/2701 = https://support.ricoh.com/bb/html/dr_ut_e/apc/model/m2700/m2700.htm
+- IM 2702, IM 2702SE = https://support.ricoh.com/bb/html/dr_ut_e/re2/model/im2702/im2702.htm
+- IM C2000/C2500 = https://support.ricoh.com/bb/html/dr_ut_e/re2/model/imc2000/imc2000.htm
+- IM C3000/C3500 = https://support.ricoh.com/bb/html/dr_ut_e/apc/model/imc3000/imc3000.htm
+- IM C4500/C6000 = https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc4500/imc4500.htm
+- IM C4500/C5500/C6000 = https://support.ricoh.com/bb/html/dr_ut_e/re1/model/imc4500/imc4500.htm
+- IM C2010/C2510 = https://support.ricoh.com/bb/html/dr_ut_e/re2/model/imc2010/imc2010.htm
+- IM C3010/C3510 = https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc3010/imc3010.htm
+- IM C4510/C6010 = https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc4510/imc4510.htm
+- IM C4510/C5510/C6010 = https://support.ricoh.com/bb/html/dr_ut_e/re2/model/imc4510/imc4510.htm

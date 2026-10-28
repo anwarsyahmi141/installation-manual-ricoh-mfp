@@ -6,4 +6,4 @@ A static website that helps Windows 10/11 users find their Ricoh MFP and follow 
 
 Open `index.html` in a web browser. No build tools or server are required.
 
-The landing page has model search and popular MFP shortcuts. The driver button opens Ricoh Asia Pacific's official Office Solutions catalog; choose the exact model and Windows version there, then download PCL 6.
+The landing page has model search and popular MFP shortcuts. For models in `ricoh-mfp-driver-link.txt`, the driver button opens that model's Ricoh support page. Other models open Ricoh Asia Pacific's official Office Solutions catalog. Choose the Windows version and download PCL 6.
