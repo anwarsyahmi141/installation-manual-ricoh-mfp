@@ -3,7 +3,6 @@ const detailView = document.querySelector('#detail-view');
 const modelInput = document.querySelector('#model');
 const detailTitle = document.querySelector('#detail-title');
 const modelNote = document.querySelector('#detail-model-note');
-const driverModelName = document.querySelector('#driver-model-name');
 const networkGuide = document.querySelector('.network');
 const manualList = document.querySelector('.manual-list');
 const models = ['IM C2000', 'IM C2500', 'IM C3000', 'IM C3500', 'IM C4500', 'IM C5500', 'IM C6000', 'IM C2010', 'IM C3010', 'IM C4510', 'IM C6010', 'MP C2004', 'MP C3004', 'MP C3504', 'MP C4504', 'MP C6004', 'MP 2555', 'MP 3055', 'MP 3555', 'MP 4055', 'MP 6055'];
@@ -19,15 +18,14 @@ function showModel(rawModel) {
   modelInput.value = model;
   detailTitle.innerHTML = `RICOH <span>${escapeHTML(model)}</span>`;
   modelNote.textContent = model;
-  driverModelName.textContent = `Ricoh ${model} PCL 6`;
   const useManualWindowsInstall = isLegacyModel(model);
   const installSteps = useManualWindowsInstall ? legacyInstructions(model) : installerInstructions(model);
   manualList.innerHTML = installSteps.map((step, index) => renderStep(step, index, useManualWindowsInstall)).join('');
-  document.querySelector('.manual .section-head h2').textContent = useManualWindowsInstall ? 'Install step by step' : 'Run the installer';
+  document.querySelector('.manual .section-head h2').textContent = 'Follow these steps in order';
   document.querySelector('.manual .step-count span').textContent = `${installSteps.length} SCREENSHOTS`;
   document.querySelector('.manual .section-head p').textContent = useManualWindowsInstall
-    ? 'These older models use Windows Add Printer and the extracted driver files.'
-    : 'These models use Ricoh’s setup program. Keep the printer on and connected to your PC or network.';
+    ? 'Step 1 downloads the driver. Then follow the screenshots for Windows Add Printer.'
+    : 'Step 1 downloads the driver. Then follow Ricoh’s setup screens to install it.';
   document.querySelector('.network h2').textContent = useManualWindowsInstall ? 'Need the printer IP address?' : 'Printer not found by setup?';
   document.querySelector('.network p').innerHTML = useManualWindowsInstall
     ? 'On the printer, open <strong>User Tools / Settings → System Settings → Interface Settings</strong> to find its IPv4 address. Enter that address when Windows asks for the printer’s TCP/IP address.'
@@ -91,7 +89,7 @@ function renderStep(step, index, legacy) {
   const folder = legacy ? 'installer-old' : 'installer-exe';
   const number = String(step.image);
   const src = `assets/${folder}/step-${number}.png`;
-  return `<details class="manual-step"${index === 0 ? ' open' : ''}><summary><span class="manual-no">${String(index + 1).padStart(2, '0')}</span><span class="manual-step-title"><strong>${escapeHTML(step.title)}</strong><small>View instructions and screenshot</small></span><span class="manual-step-toggle" aria-hidden="true">+</span></summary><div class="manual-step-content"><p>${escapeHTML(step.description)}</p><a class="step-image-link" href="${src}" target="_blank" rel="noreferrer" aria-label="Open larger screenshot for ${escapeHTML(step.title)}"><img class="step-image" src="${src}" alt="Ricoh installation screenshot: ${escapeHTML(step.title)}" loading="lazy"></a><span class="image-hint">Select the screenshot to view it larger.</span></div></details>`;
+  return `<details class="manual-step"${index === 0 ? ' open' : ''}><summary><span class="manual-no">${String(index + 2).padStart(2, '0')}</span><span class="manual-step-title"><strong>${escapeHTML(step.title)}</strong><small>View instructions and screenshot</small></span><span class="manual-step-toggle" aria-hidden="true">+</span></summary><div class="manual-step-content"><p>${escapeHTML(step.description)}</p><a class="step-image-link" href="${src}" target="_blank" rel="noreferrer" aria-label="Open larger screenshot for ${escapeHTML(step.title)}"><img class="step-image" src="${src}" alt="Ricoh installation screenshot: ${escapeHTML(step.title)}" loading="lazy"></a><span class="image-hint">Select the screenshot to view it larger.</span></div></details>`;
 }
 
 function showHome() {
