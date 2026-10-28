@@ -116,6 +116,9 @@ popularModels.forEach((model, index) => {
 });
 
 document.querySelector('#search-button').addEventListener('click', () => showModel(modelInput.value));
+modelInput.addEventListener('change', () => {
+  if (modelInput.value.trim()) showModel(modelInput.value);
+});
 modelInput.addEventListener('keydown', event => {
   if (event.key === 'Enter') showModel(modelInput.value);
 });
