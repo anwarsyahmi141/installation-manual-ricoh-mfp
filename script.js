@@ -46,7 +46,7 @@ document.querySelector('#models').replaceChildren(...models.map(model => {
   return option;
 }));
 
-function showModel(rawModel) {
+function showModel(rawModel, updateHistory = true) {
   const model = rawModel.trim().replace(/\s+/g, ' ').toUpperCase();
   if (!model) {
     modelInput.focus();
@@ -76,7 +76,8 @@ function showModel(rawModel) {
   homeView.hidden = true;
   detailView.hidden = false;
   networkGuide.hidden = false;
-  history.replaceState({ model }, '', `#${encodeURIComponent(model.toLowerCase().replaceAll(' ', '-'))}`);
+  const modelHash = `#${encodeURIComponent(model.toLowerCase().replaceAll(' ', '-'))}`;
+  if (updateHistory && location.hash !== modelHash) history.pushState({ model }, '', modelHash);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -139,14 +140,20 @@ function renderStep(step, index, legacy) {
   return `<details class="manual-step"${index === 0 ? ' open' : ''}><summary><span class="manual-no">${String(index + 2).padStart(2, '0')}</span><span class="manual-step-title"><strong>${escapeHTML(step.title)}</strong><small>View instructions and screenshot</small></span><span class="manual-step-toggle" aria-hidden="true">+</span></summary><div class="manual-step-content"><p>${escapeHTML(step.description)}</p><a class="step-image-link" href="${src}" target="_blank" rel="noreferrer" aria-label="Open larger screenshot for ${escapeHTML(step.title)}"><img class="step-image" src="${src}" alt="Ricoh installation screenshot: ${escapeHTML(step.title)}" loading="lazy"></a><span class="image-hint">Select the screenshot to view it larger.</span></div></details>`;
 }
 
-function showHome() {
+function showHome(updateHistory = true) {
   detailView.hidden = true;
   networkGuide.hidden = true;
   homeView.hidden = false;
   document.title = 'Ricoh MFP Setup Guide';
-  history.replaceState({}, '', location.pathname + location.search);
+  if (updateHistory && location.hash) history.replaceState({}, '', location.pathname + location.search);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+window.addEventListener('popstate', () => {
+  const modelFromHash = decodeURIComponent(location.hash.slice(1)).replaceAll('-', ' ').trim();
+  if (modelFromHash) showModel(modelFromHash, false);
+  else showHome(false);
+});
 
 function escapeHTML(value) {
   return value.replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
@@ -178,4 +185,4 @@ detailDriverLink.href = officialDriverPage;
 networkGuide.hidden = true;
 
 const initialModel = decodeURIComponent(location.hash.slice(1)).replaceAll('-', ' ').trim();
-if (initialModel) showModel(initialModel);
+if (initialModel) showModel(initialModel, false);
