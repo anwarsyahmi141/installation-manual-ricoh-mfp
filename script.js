@@ -12,7 +12,7 @@ const modelDriverPages = [
   { models: ['MP C3001', 'MP C3501'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/re2/model/mpc281/mpc281.htm?lang=en' },
   { models: ['MP C3002', 'MP C3502'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc300/mpc300.htm?lang=en' },
   { models: ['MP C3003SP', 'MP C3503SP'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mpc3003/mpc3003.htm' },
-  { models: ['MP 2001SP', 'MP 2501SP'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mp200/mp200.htm' },
+  { models: ['MP 2001SP', 'MP 2501', 'MP 2501SP'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/apc/model/mp200/mp200.htm' },
   { models: ['MP 2555', 'MP 3055', 'MP 3555', 'MP 4055', 'MP 5055', 'MP 6055'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mp2595/mp2595.htm' },
   { models: ['MP C3004', 'MP C3504'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mpc3004/mpc3004.htm' },
   { models: ['MP C3004EX', 'MP C3504EX'], url: 'https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mpc3004ex/mpc3004ex.htm' },
@@ -36,6 +36,7 @@ const modelDriverPages = [
 ];
 const models = [...new Set([
   ...modelDriverPages.flatMap(entry => entry.models),
+  'MP 2500', 'MP 2500SP', 'MP 2501', 'MP C2800', 'MP C2801', 'MP C2802',
   'IM C2000', 'IM C2500', 'IM C3000', 'IM C3500', 'IM C4500', 'IM C5500', 'IM C6000',
   'IM C2010', 'IM C3010', 'IM C4510', 'IM C6010', 'MP C2004', 'MP C3004', 'MP C3504',
   'MP C4504', 'MP C6004', 'MP 2555', 'MP 3055', 'MP 3555', 'MP 4055', 'MP 6055',
@@ -47,7 +48,9 @@ document.querySelector('#models').replaceChildren(...models.map(model => {
 }));
 
 function showModel(rawModel, updateHistory = true) {
-  const model = rawModel.trim().replace(/\s+/g, ' ').toUpperCase();
+  const model = rawModel.trim().replace(/\s+/g, ' ').toUpperCase()
+    .replace(/^AFICIO\s+/, '')
+    .replace(/^(MP|IM)(?=(?:C)?\d)/, '$1 ');
   if (!model) {
     modelInput.focus();
     return;
@@ -82,7 +85,9 @@ function showModel(rawModel, updateHistory = true) {
 }
 
 function isLegacyModel(model) {
-  return /^MP\s+2500\b/.test(model) || /^MP\s+C\d{3}[12]\b/.test(model);
+  return /^MP\s+250[01](?:SP)?\b/.test(model)
+    || /^MP\s+C28\d{2}\b/.test(model)
+    || /^MP\s+C\d{3}[12]\b/.test(model);
 }
 
 function resolveDriverPage(model) {
